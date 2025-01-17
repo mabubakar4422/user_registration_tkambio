@@ -1,0 +1,76 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="{% url 'accounts:register_company' %}" class="btn btn-link text-decoration-none">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="text-end">
+                    <div class="language-selector">
+                        <img src="../../static/images/mxnflag.png" alt="Español" class="flag-icon">
+                        <span>Español</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <img src="../../static/images/logo .png" alt="TKambio" class="logo mb-4">
+                <h4 class="mb-4">Finalidad de las transacciones</h4>
+            </div>
+
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="mb-4">
+                    <label for="transaction_purpose" class="form-label">Objetivo de las transacciones (especificar)</label>
+                    <input type="text" class="form-control" id="transaction_purpose" name="transaction_purpose" required 
+                           value="{{ company.transaction_purpose|default:'' }}">
+                    <div class="form-text text-danger">
+                        Este campo es obligatorio.
+                        No indique "Pago por bienes" o "Pago por servicios". Ejemplos: "Estoy comprando fruta" o "Estoy comprando equipo que se usará para cultivar"
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="annual_volume" class="form-label">Volumen anual de transacciones (en USD)</label>
+                    <input type="number" class="form-control" id="annual_volume" name="annual_volume" required 
+                           value="{{ company.annual_volume|default:'' }}">
+                    <!-- <div class="form-text text-danger">
+                        Este campo es obligatorio.
+                    </div> -->
+                </div>
+
+                <div class="mb-4">
+                    <label for="annual_transactions" class="form-label">Número anual de transacciones</label>
+                    <input type="number" class="form-control" id="annual_transactions" name="annual_transactions" required 
+                           value="{{ company.annual_transactions|default:'' }}">
+                    <!-- <div class="form-text text-danger">
+                        Este campo es obligatorio.
+                    </div> -->
+                </div>
+
+                <div class="mb-4">
+                    <label for="currencies_needed" class="form-label">Divisas requeridas</label>
+                    <select class="form-select" id="currencies_needed" name="currencies_needed" required>
+                        <option value="" {% if not company.currencies_needed %}selected{% endif %}>Selecciona una opción</option>
+                        <option value="USD_MXN" {% if company.currencies_needed == 'USD_MXN' %}selected{% endif %}>USD/MXN</option>
+                        <option value="MXN_USD" {% if company.currencies_needed == 'MXN_USD' %}selected{% endif %}>MXN/USD</option>
+                        <option value="BOTH" {% if company.currencies_needed == 'BOTH' %}selected{% endif %}>Ambas</option>
+                    </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="progress position-fixed top-0 start-0 end-0" style="height: 4px;">
+    <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}

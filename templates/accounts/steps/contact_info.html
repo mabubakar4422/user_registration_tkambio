@@ -1,0 +1,83 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <div class="text-end mb-3">
+                <div class="language-selector">
+                    <img src="../../static/images/mxnflag.png" alt="Español" class="flag-icon">
+                    <span>Español</span>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <img src="../../static/images/logo .png" alt="TKambio" class="logo mb-4">
+                
+                <p class="text-muted">
+                    <span class="text-primary">Déjanos tus datos</span> y escoge cómo iniciar la experiencia del mejor tipo de cambio.
+                </p>
+                <p class="small text-muted">
+                    Esta información también servirá para enviarte un enlace personalizado a tu correo por si no culminas tu registro.
+                </p>
+            </div>
+
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" required 
+                           value="{{ company.email|default:'' }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="full_name" class="form-label">Nombres y apellidos</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" required 
+                           value="{{ company.full_name|default:'' }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="company_name" class="form-label">Empresa</label>
+                    <input type="text" class="form-control" id="company_name" name="company_name" required 
+                           value="{{ company.company_name|default:'' }}">
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="country" class="form-label">País</label>
+                        <select class="form-select" id="country" name="country" required>
+                            <option value="" {% if not company.country %}selected{% endif %}>Selecciona una opción</option>
+                            <option value="US" {% if company.country == 'US' %}selected{% endif %}>Estados Unidos</option>
+                            <option value="MX" {% if company.country == 'MX' %}selected{% endif %}>Mexico</option>
+                            <option value="other" {% if company.country == 'other' %}selected{% endif %}>Resto del mundo</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <div class="input-group">
+                            <span class="input-group-text">+1</span>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="201-555-0123" required 
+                                   value="{{ company.phone|default:'' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-muted mb-2">¿Quieres hablar con un asesor?</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Agendar cita</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="progress position-fixed top-0 start-0 end-0" style="height: 4px;">
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endblock %}

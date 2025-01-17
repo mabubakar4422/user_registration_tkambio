@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center mb-0">Método de pago</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">4/4</div>
+                        </div>
+
+                        <!-- Payment Method Selection -->
+                        <div class="mb-4">
+                            <label>Método preferido de pago</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="ach" value="ach">
+                                <label class="form-check-label" for="ach">ACH Débito Directo</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="check" value="check">
+                                <label class="form-check-label" for="check">Cheque</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="transfer" value="transfer">
+                                <label class="form-check-label" for="transfer">Transferencia</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="none" value="none" checked>
+                                <label class="form-check-label" for="none">No aplicable</label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'accounts:register_company' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Finalizar registro <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

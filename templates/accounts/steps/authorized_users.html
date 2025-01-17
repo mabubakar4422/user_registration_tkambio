@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center mb-0">Usuario autorizados</h2>
+                    <p class="text-center text-muted mt-2">Enumere hasta 2 usuarios autorizados para realizar transacciones en la plataforma</p>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">2/4</div>
+                        </div>
+
+                        <!-- First Authorized User -->
+                        <h5>Datos del usuario autorizado 1</h5>
+                        <div class="mb-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user1_name">Nombres y apellidos</label>
+                                        <input type="text" class="form-control" id="user1_name" name="user1_name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user1_position">Cargo en la empresa</label>
+                                        <input type="text" class="form-control" id="user1_position" name="user1_position" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user1_phone">Teléfono celular</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">🇺🇸 +1</span>
+                                            <input type="tel" class="form-control" id="user1_phone" name="user1_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="201-555-0123" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user1_email">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="user1_email" name="user1_email" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Second Authorized User -->
+                        <h5>Datos del usuario autorizado 2</h5>
+                        <div class="mb-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user2_name">Nombres y apellidos</label>
+                                        <input type="text" class="form-control" id="user2_name" name="user2_name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user2_position">Cargo en la empresa</label>
+                                        <input type="text" class="form-control" id="user2_position" name="user2_position">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user2_phone">Teléfono celular</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">🇺🇸 +1</span>
+                                            <input type="tel" class="form-control" id="user2_phone" name="user2_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="201-555-0123">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="user2_email">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="user2_email" name="user2_email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'accounts:register_company' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

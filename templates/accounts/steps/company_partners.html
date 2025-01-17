@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center mb-0">Socios de la empresa</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">3/4</div>
+                        </div>
+
+                        <!-- Number of Partners Selection -->
+                        <div class="mb-4">
+                            <label>¿Cuantos socios tienen el 25% o más de acciones?</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="num_partners" id="partners1" value="1" checked>
+                                <label class="form-check-label" for="partners1">1</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="num_partners" id="partners2" value="2">
+                                <label class="form-check-label" for="partners2">2</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="num_partners" id="partners3" value="3">
+                                <label class="form-check-label" for="partners3">3</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="num_partners" id="partners4" value="4">
+                                <label class="form-check-label" for="partners4">4</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="num_partners" id="partners0" value="0">
+                                <label class="form-check-label" for="partners0">Ninguno</label>
+                            </div>
+                        </div>
+
+                        <!-- Partner 1 Information -->
+                        <div id="partner1_section">
+                            <h5>Datos de socio 1</h5>
+                            <div class="mb-4">
+                                <div class="form-group">
+                                    <label for="partner1_name">Nombre legal (sin abreviaciones)</label>
+                                    <input type="text" class="form-control" id="partner1_name" name="partner1_name">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="partner1_percentage">Porcentaje de propiedad</label>
+                                    <input type="number" class="form-control" id="partner1_percentage" name="partner1_percentage" min="0" max="100" step="0.01">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="partner1_birth_date">Fecha de nacimiento (MM/DD/YYYY)</label>
+                                    <input type="date" class="form-control" id="partner1_birth_date" name="partner1_birth_date">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'accounts:register_company' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left"></i> Anterior
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Siguiente <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Show/hide partner sections based on selection
+    document.querySelectorAll('input[name="num_partners"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const numPartners = parseInt(this.value);
+            const partnerSection = document.getElementById('partner1_section');
+            
+            if (numPartners > 0) {
+                partnerSection.style.display = 'block';
+                document.getElementById('partner1_name').required = true;
+                document.getElementById('partner1_percentage').required = true;
+                document.getElementById('partner1_birth_date').required = true;
+            } else {
+                partnerSection.style.display = 'none';
+                document.getElementById('partner1_name').required = false;
+                document.getElementById('partner1_percentage').required = false;
+                document.getElementById('partner1_birth_date').required = false;
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

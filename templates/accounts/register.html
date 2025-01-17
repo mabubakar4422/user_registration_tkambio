@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registra a tu empresa en TKambio USA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <h2 class="text-primary">Registra a tu empresa en TKambio USA</h2>
+                            <p class="text-muted">
+                                La libertad de transaccionar sin comisiones, sin cobros por mantenimiento y con el mejor tipo de cambio.
+                            </p>
+                        </div>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label for="legal_name" class="form-label">Nombre de la empresa (Razón social)</label>
+                                    <input type="text" class="form-control" id="legal_name" name="legal_name" required value="{{ request.POST.legal_name|default:'' }}">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="commercial_name" class="form-label">Nombre comercial (Opcional)</label>
+                                    <input type="text" class="form-control" id="commercial_name" name="commercial_name" value="{{ request.POST.commercial_name|default:'' }}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="state" class="form-label">Estado</label>
+                                    <select class="form-select" id="state" name="state" required>
+                                        <option value="">Selecciona un opción</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="city" class="form-label">Ciudad</label>
+                                    <select class="form-select" id="city" name="city" required>
+                                        <option value="">Selecciona un opción</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="postal_code" class="form-label">Código postal</label>
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" required value="{{ request.POST.postal_code|default:'' }}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="address" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="address" name="address" required value="{{ request.POST.address|default:'' }}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Correo (para recibir notificaciones)</label>
+                                    <input type="email" class="form-control" id="email" name="email" required value="{{ request.POST.email|default:'' }}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Teléfono celular</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">+1</span>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required value="{{ request.POST.phone|default:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="website" class="form-label">Sitio Web (Opcional)</label>
+                                    <input type="url" class="form-control" id="website" name="website" value="{{ request.POST.website|default:'' }}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="tax_id" class="form-label">Tax ID</label>
+                                    <input type="text" class="form-control" id="tax_id" name="tax_id" required value="{{ request.POST.tax_id|default:'' }}">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label for="start_date" class="form-label">Fecha de inicio de operaciones</label>
+                                    <input type="date" class="form-control" id="start_date" name="start_date" required value="{{ request.POST.start_date|default:'' }}">
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">Tipo de empresa</label>
+                                    {% for value, label in company_types %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="company_type" id="{{ value }}" value="{{ value }}" required {% if request.POST.company_type == value %}checked{% endif %}>
+                                        <label class="form-check-label" for="{{ value }}">
+                                            {{ label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100">Siguiente</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

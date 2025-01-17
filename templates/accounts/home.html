@@ -1,0 +1,54 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <div class="text-center mb-4">
+                <img src="../../static/images/logo .png" alt="TKambio" class="logo mb-4">
+                <h4 class="mb-4">Bienvenido a TKambio</h4>
+            </div>
+
+            <div class="text-center">
+                <p class="text-muted mb-4">
+                    Registra tu empresa y comienza a operar con nosotros. El proceso es simple y rápido.
+                </p>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-user-circle fa-2x mb-3 text-primary"></i>
+                                <h5>Información de contacto</h5>
+                                <p class="text-muted">Proporciona tus datos básicos de contacto</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-building fa-2x mb-3 text-primary"></i>
+                                <h5>Datos de la empresa</h5>
+                                <p class="text-muted">Detalles legales y comerciales de tu empresa</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="fas fa-money-bill-wave fa-2x mb-3 text-primary"></i>
+                                <h5>Información financiera</h5>
+                                <p class="text-muted">Detalles de transacciones y método de pago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a href="{% url 'accounts:register_company' %}" class="btn btn-primary">Comenzar registro</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

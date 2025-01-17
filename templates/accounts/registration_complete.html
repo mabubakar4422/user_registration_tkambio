@@ -1,0 +1,40 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+            <div class="text-center mb-4">
+                <img src="../../static/images/logo .png" alt="TKambio" class="logo mb-4">
+            </div>
+
+            <div class="text-center">
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
+                </div>
+                
+                <h3 class="text-success mb-4">¡Registro completado exitosamente!</h3>
+                
+                <p class="text-muted mb-4">
+                    Gracias por registrar tu empresa con nosotros. Nuestro equipo revisará tu información y te contactará pronto.
+                </p>
+                
+                <div class="alert alert-info mb-4" role="alert">
+                    <p class="mb-0">
+                        <strong>Próximos pasos:</strong><br>
+                        1. Recibirás un correo de confirmación<br>
+                        2. Revisaremos tu información<br>
+                        3. Te contactaremos para finalizar el proceso
+                    </p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{% url 'accounts:home' %}" class="btn btn-primary">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
